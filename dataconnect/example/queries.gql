@@ -1,0 +1,38 @@
+mutation CreateLocation @auth(level: USER) {
+  location_insert(data: {
+    address: "123 Main St",
+    createdAt: "2024-01-01T00:00:00Z",
+    name: "Example Location",
+    latitude: 34.0522,
+    longitude: -118.2437
+  })
+}
+
+query ListTasksForUser($userId: UUID!) @auth(level: USER) {
+  tasks(where: {assignedToId: {eq: $userId}}) {
+    id
+    title
+    description
+    dueDate
+    status
+  }
+}
+
+mutation UpdateVisitCheckOutTime($visitId: UUID!, $checkOutTime: Timestamp!) @auth(level: USER) {
+  visit_update(
+    id: $visitId,
+    data: {
+      checkOutTime: $checkOutTime
+    }
+  )
+}
+
+query ListMaterial @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  materials {
+    id
+    name
+    description
+    imageUrl
+    unitOfMeasure
+  }
+}

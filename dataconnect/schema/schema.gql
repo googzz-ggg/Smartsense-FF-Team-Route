@@ -1,0 +1,51 @@
+type User @table {
+  displayName: String!
+  email: String!
+  role: String!
+  phoneNumber: String
+  photoUrl: String
+}
+
+type Location @table {
+  name: String!
+  address: String!
+  createdAt: Timestamp!
+  description: String
+  latitude: Float
+  longitude: Float
+}
+
+type Task @table {
+  title: String!
+  assignedTo: User!
+  location: Location!
+  status: String!
+  dueDate: Timestamp!
+  description: String
+  notes: String
+}
+
+type Visit @table {
+  user: User!
+  location: Location!
+  task: Task
+  checkInTime: Timestamp!
+  checkOutTime: Timestamp
+  notes: String
+  activityReport: String
+}
+
+type Material @table {
+  name: String!
+  unitOfMeasure: String!
+  description: String
+  imageUrl: String
+}
+
+type Inventory @table {
+  material: Material!
+  quantity: Int!
+  locationType: String!
+  user: User
+  location: Location
+}

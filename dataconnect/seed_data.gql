@@ -1,0 +1,96 @@
+mutation SeedDatabase @transaction @auth(level: USER, insecureReason: "This operation is used to seed the database, and is safe to expose") {
+  location_insertMany(data: [
+    {
+      id: "67890-abcde-fghij-klmno",
+      address: "123 Main St",
+      createdAt: "2024-01-01T00:00:00Z",
+      name: "Headquarters",
+      latitude: 34.0522,
+      longitude: -118.2437,
+      description: "Main office"
+    },
+    {
+      id: "fedcba-09876-jihgf-onmlk",
+      address: "456 Elm St",
+      createdAt: "2024-01-02T00:00:00Z",
+      name: "Branch Office",
+      latitude: 37.7749,
+      longitude: -122.4194,
+      description: "San Francisco branch"
+    }
+  ])
+  user_insertMany(data: [
+    {
+      id: "1a2b3c-4d5e-6f7g-8h9i",
+      displayName: "Alice Smith",
+      email: "alice@example.com",
+      role: "admin"
+    },
+    {
+      id: "9i8h7g-6f5e-4d3c-2b1a",
+      displayName: "Bob Johnson",
+      email: "bob@example.com",
+      role: "user"
+    }
+  ])
+  material_insertMany(data: [
+    {
+      id: "material-1",
+      name: "Steel",
+      unitOfMeasure: "tonnes"
+    },
+    {
+      id: "material-2",
+      name: "Wood",
+      unitOfMeasure: "cubic meters"
+    }
+  ])
+  task_insertMany(data: [
+    {
+      id: "task-1",
+      assignedToId: "1a2b3c-4d5e-6f7g-8h9i",
+      locationId: "67890-abcde-fghij-klmno",
+      title: "Inspect Building",
+      status: "open",
+      dueDate: "2024-02-15T00:00:00Z",
+      description: "Inspect the building for damages"
+    },
+    {
+      id: "task-2",
+      assignedToId: "9i8h7g-6f5e-4d3c-2b1a",
+      locationId: "fedcba-09876-jihgf-onmlk",
+      title: "Fix Plumbing",
+      status: "in progress",
+      dueDate: "2024-02-20T00:00:00Z",
+      description: "Fix the plumbing in the building"
+    }
+  ])
+  visit_insertMany(data: [
+    {
+      id: "visit-1",
+      locationId: "67890-abcde-fghij-klmno",
+      userId: "1a2b3c-4d5e-6f7g-8h9i",
+      checkInTime: "2024-02-01T08:00:00Z"
+    },
+    {
+      id: "visit-2",
+      locationId: "fedcba-09876-jihgf-onmlk",
+      userId: "9i8h7g-6f5e-4d3c-2b1a",
+      checkInTime: "2024-02-05T09:00:00Z"
+    }
+  ])
+  inventory_insertMany(data: [
+    {
+      materialId: "material-1",
+      locationId: "67890-abcde-fghij-klmno",
+      quantity: 100,
+      locationType: "warehouse"
+    },
+    {
+      materialId: "material-2",
+      locationId: "fedcba-09876-jihgf-onmlk",
+      quantity: 50,
+      locationType: "storage unit"
+    }
+  ])
+}

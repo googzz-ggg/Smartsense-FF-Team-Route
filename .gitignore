@@ -1,0 +1,5 @@
+# Ignore node modules and cache directories
+node_modules/
+.cache/
+# You might also want to ignore build output
+/build
